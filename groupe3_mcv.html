@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groupe 3 – Fidéliser et Développer la RC | Bac Pro MCV</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pri:     #3b0a1f;
+  --pri-med: #6b1535;
+  --pri-vif: #9d1f4f;
+  --pri-clair:#fce7ef;
+  --pri-pale: #fff5f8;
+  --vert:    #16a34a;
+  --vert-c:  #dcfce7;
+  --rouge:   #dc2626;
+  --rouge-c: #fee2e2;
+  --gris-50: #f8fafc;
+  --gris-100:#f1f5f9;
+  --gris-200:#e2e8f0;
+  --gris-400:#94a3b8;
+  --gris-600:#475569;
+  --gris-800:#1e293b;
+  --blanc:   #ffffff;
+  --r:10px;
+  --ombre:0 2px 12px rgba(59,10,31,0.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--gris-50);color:var(--gris-800);font-size:15px;line-height:1.65}
+
+header{background:linear-gradient(135deg,#1e0510 0%,#6b1535 100%);color:#fff;padding:28px 40px 22px;position:sticky;top:0;z-index:200;box-shadow:0 4px 20px rgba(30,5,16,.4)}
+.htag{display:inline-block;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:8px;color:#fff}
+header h1{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.02em}
+header p{font-size:.82rem;color:#f9a8c9;margin-top:3px;font-weight:300}
+
+.app{display:grid;grid-template-columns:290px 1fr;min-height:calc(100vh - 95px)}
+
+aside{background:var(--blanc);border-right:1px solid var(--gris-200);padding:18px 0;position:sticky;top:95px;height:calc(100vh - 95px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#f9a8c9 transparent}
+aside::-webkit-scrollbar{width:4px}
+aside::-webkit-scrollbar-thumb{background:#f9a8c9;border-radius:2px}
+.s-title{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gris-400);padding:0 18px 10px}
+
+.bloc-header{display:flex;align-items:center;gap:9px;padding:9px 18px;cursor:pointer;background:none;border:none;width:100%;text-align:left;font-family:'Syne',sans-serif;font-size:.76rem;font-weight:700;color:var(--pri);transition:background .15s;border-left:3px solid transparent}
+.bloc-header:hover{background:var(--pri-pale)}
+.bloc-header.open{background:var(--pri-pale);border-left-color:var(--pri-vif)}
+.bloc-badge{min-width:22px;height:22px;background:var(--pri-med);color:#fff;font-size:.66rem;font-weight:700;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;flex-shrink:0}
+
+.comp-list{display:none}
+.comp-list.open{display:block}
+
+.comp-btn{display:flex;align-items:flex-start;gap:7px;padding:6px 18px 6px 26px;cursor:pointer;background:none;border:none;width:100%;text-align:left;font-size:.74rem;color:var(--gris-600);transition:all .15s;border-left:3px solid transparent;line-height:1.35}
+.comp-btn:hover{background:var(--pri-pale);color:var(--pri-vif)}
+.comp-btn.active{background:var(--pri-clair);color:var(--pri-med);font-weight:500;border-left-color:#e879a0}
+.comp-dot{width:6px;height:6px;background:var(--gris-200);border-radius:50%;margin-top:6px;flex-shrink:0;transition:background .15s}
+.comp-btn.active .comp-dot{background:var(--pri-vif)}
+.comp-btn:hover .comp-dot{background:var(--pri-vif)}
+
+main{padding:30px 36px;max-width:820px}
+
+.welcome{background:var(--blanc);border-radius:var(--r);border:1px solid var(--gris-200);padding:44px 36px;text-align:center;box-shadow:var(--ombre)}
+.welcome-icon{font-size:2.6rem;margin-bottom:14px}
+.welcome h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--pri);margin-bottom:8px}
+.welcome p{color:var(--gris-600);font-size:.86rem;max-width:380px;margin:0 auto}
+
+.section-card{display:none;animation:fadeIn .22s ease}
+.section-card.visible{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.s-breadcrumb{font-size:.7rem;color:var(--gris-400);font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px}
+.s-breadcrumb span{color:var(--pri-vif)}
+.s-title2{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--pri);line-height:1.25;margin-bottom:22px}
+
+.fiche{background:var(--blanc);border-radius:var(--r);border:1px solid var(--gris-200);box-shadow:var(--ombre);margin-bottom:22px;overflow:hidden}
+.fiche-head{background:linear-gradient(135deg,#1e0510 0%,#6b1535 100%);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.fiche-head-ico{width:32px;height:32px;background:rgba(255,255,255,.14);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.fiche-head h3{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.fiche-body{padding:20px}
+
+.notions-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+@media(max-width:600px){.notions-grid{grid-template-columns:1fr}}
+.notion{background:var(--pri-pale);border:1px solid var(--pri-clair);border-radius:8px;padding:12px 14px}
+.notion-term{font-family:'Syne',sans-serif;font-size:.73rem;font-weight:700;color:var(--pri-med);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.notion-def{font-size:.79rem;color:var(--gris-600);line-height:1.5}
+
+.keypoints{background:var(--gris-50);border-radius:8px;border:1px solid var(--gris-200);padding:14px 18px}
+.kp-title{font-family:'Syne',sans-serif;font-size:.67rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gris-400);margin-bottom:9px}
+.keypoints ul{list-style:none}
+.keypoints ul li{font-size:.8rem;color:var(--gris-600);padding:4px 0 4px 16px;position:relative;border-bottom:1px solid var(--gris-200)}
+.keypoints ul li:last-child{border-bottom:none}
+.keypoints ul li::before{content:'→';position:absolute;left:0;color:var(--pri-vif);font-weight:700}
+
+.qcm{background:var(--blanc);border-radius:var(--r);border:1px solid var(--gris-200);box-shadow:var(--ombre);overflow:hidden}
+.qcm-head{background:var(--pri);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.qcm-head-ico{width:32px;height:32px;background:rgba(255,255,255,.11);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.qcm-head h3{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.qcm-body{padding:20px}
+
+.q-block{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--gris-200)}
+.q-block:last-of-type{border-bottom:none;margin-bottom:12px}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--pri-med);color:#fff;font-size:.64rem;font-weight:700;border-radius:50%;margin-right:6px;font-family:'Syne',sans-serif;vertical-align:middle}
+.q-text{font-size:.86rem;font-weight:500;color:var(--gris-800);margin-bottom:12px;line-height:1.5}
+
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{background:var(--gris-50);border:1.5px solid var(--gris-200);border-radius:7px;padding:9px 13px;text-align:left;font-size:.8rem;color:var(--gris-600);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;display:flex;align-items:flex-start;gap:8px}
+.opt:hover:not(:disabled){background:var(--pri-pale);border-color:#e879a0;color:var(--pri)}
+.opt:disabled{cursor:default}
+.opt.correct{background:var(--vert-c);border-color:var(--vert);color:var(--vert);font-weight:500}
+.opt.wrong{background:var(--rouge-c);border-color:var(--rouge);color:var(--rouge)}
+.opt.reveal{background:var(--vert-c);border-color:var(--vert);color:var(--vert);font-weight:500}
+.opt-l{min-width:18px;height:18px;background:var(--gris-200);border-radius:3px;font-size:.62rem;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--gris-600);font-family:'Syne',sans-serif;flex-shrink:0;margin-top:1px}
+.opt.correct .opt-l,.opt.reveal .opt-l{background:var(--vert);color:#fff}
+.opt.wrong .opt-l{background:var(--rouge);color:#fff}
+
+.expl{display:none;background:var(--pri-pale);border:1px solid var(--pri-clair);border-radius:7px;padding:10px 14px;margin-top:10px;font-size:.79rem;color:var(--pri);line-height:1.6}
+.expl.on{display:block}
+.expl strong{color:var(--pri-med);font-weight:600}
+
+.reset-btn{display:inline-flex;align-items:center;gap:6px;margin-top:4px;background:var(--pri-vif);color:#fff;border:none;border-radius:7px;padding:8px 16px;font-size:.79rem;font-weight:500;cursor:pointer;transition:background .15s;font-family:'DM Sans',sans-serif}
+.reset-btn:hover{background:var(--pri-med)}
+
+@media(max-width:768px){.app{grid-template-columns:1fr}aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--gris-200)}main{padding:18px}header{padding:18px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="htag">Bac Pro MCV · Terminale</div>
+  <h1>Groupe 3 — Fidéliser et Développer la Relation Client</h1>
+  <p>14 compétences · Fiches de révision + QCM interactifs</p>
+</header>
+
+<div class="app">
+<aside>
+  <div class="s-title">Compétences</div>
+
+  <div>
+    <button class="bloc-header" onclick="toggleBloc('b31',this)">
+      <span class="bloc-badge">3.1</span>Traiter et exploiter l'information ou le contact client
+    </button>
+    <div class="comp-list" id="b31">
+      <button class="comp-btn" onclick="show('c1',this)"><span class="comp-dot"></span>Traiter les messages et/ou les demandes des clients</button>
+      <button class="comp-btn" onclick="show('c2',this)"><span class="comp-dot"></span>Recueillir, extraire, exploiter, synthétiser les données de sources internes et externes</button>
+      <button class="comp-btn" onclick="show('c3',this)"><span class="comp-dot"></span>Rendre compte des données appropriées</button>
+      <button class="comp-btn" onclick="show('c4',this)"><span class="comp-dot"></span>Proposer des actions de fidélisation en adéquation avec les données et l'orientation commerciale</button>
+    </div>
+  </div>
+
+  <div>
+    <button class="bloc-header" onclick="toggleBloc('b32',this)">
+      <span class="bloc-badge">3.2</span>Contribuer aux actions de fidélisation et de développement de la RC
+    </button>
+    <div class="comp-list" id="b32">
+      <button class="comp-btn" onclick="show('c5',this)"><span class="comp-dot"></span>Sélectionner et mettre en œuvre les outils de fidélisation de l'entreprise</button>
+      <button class="comp-btn" onclick="show('c6',this)"><span class="comp-dot"></span>Concourir à la préparation et à l'organisation d'événements/opérations de fidélisation</button>
+      <button class="comp-btn" onclick="show('c7',this)"><span class="comp-dot"></span>Participer à la mise en œuvre des événements et opérations de fidélisation</button>
+      <button class="comp-btn" onclick="show('c8',this)"><span class="comp-dot"></span>Effectuer des ventes au rebond</button>
+      <button class="comp-btn" onclick="show('c9',this)"><span class="comp-dot"></span>Réaliser les opérations de suivi post-événement</button>
+      <button class="comp-btn" onclick="show('c10',this)"><span class="comp-dot"></span>Mobiliser les outils d'internet et les réseaux sociaux</button>
+    </div>
+  </div>
+
+  <div>
+    <button class="bloc-header" onclick="toggleBloc('b33',this)">
+      <span class="bloc-badge">3.3</span>Évaluer les actions de fidélisation et de développement de la RC
+    </button>
+    <div class="comp-list" id="b33">
+      <button class="comp-btn" onclick="show('c11',this)"><span class="comp-dot"></span>Enrichir et actualiser le SIC</button>
+      <button class="comp-btn" onclick="show('c12',this)"><span class="comp-dot"></span>Mesurer et analyser les résultats</button>
+      <button class="comp-btn" onclick="show('c13',this)"><span class="comp-dot"></span>Rendre compte des actions et des résultats par écrit et/ou à l'oral</button>
+      <button class="comp-btn" onclick="show('c14',this)"><span class="comp-dot"></span>Proposer des axes d'amélioration</button>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+  <div class="welcome" id="welcome">
+    <div class="welcome-icon">🤝</div>
+    <h2>Groupe 3 — Fidéliser et Développer la RC</h2>
+    <p>Sélectionne une compétence dans le sommaire pour afficher la fiche de révision et le QCM.</p>
+  </div>
+
+<!-- ===== C1 – Traiter les messages et demandes ===== -->
+<div class="section-card" id="c1">
+  <div class="s-breadcrumb">3.1 Traiter et exploiter l'information ou le contact client › <span>Compétence 1</span></div>
+  <div class="s-title2">Traiter les messages et/ou les demandes des clients</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Message client</div><div class="notion-def">Toute communication entrante d'un client : e-mail, message sur les réseaux sociaux, formulaire de contact, appel téléphonique, courrier. Chacun doit recevoir une réponse adaptée dans un délai raisonnable.</div></div>
+        <div class="notion"><div class="notion-term">Délai de réponse</div><div class="notion-def">Temps acceptable entre la réception d'un message et la réponse apportée. En B2C, les standards actuels : moins de 24h pour un e-mail, moins de 1h pour les réseaux sociaux.</div></div>
+        <div class="notion"><div class="notion-term">Qualification de la demande</div><div class="notion-def">Identification de la nature, de l'urgence et du niveau de complexité d'une demande client avant d'y répondre ou de la transmettre au bon interlocuteur.</div></div>
+        <div class="notion"><div class="notion-term">Réponse personnalisée</div><div class="notion-def">Réponse qui tient compte de l'historique du client, de sa situation spécifique et de son canal de contact. Elle s'oppose aux réponses automatiques génériques qui frustrent le client.</div></div>
+        <div class="notion"><div class="notion-term">Escalade</div><div class="notion-def">Transmission d'une demande complexe ou hors périmètre à un niveau hiérarchique supérieur ou à un service spécialisé. Doit être rapide et accompagnée de toutes les informations utiles.</div></div>
+        <div class="notion"><div class="notion-term">Traçabilité des échanges</div><div class="notion-def">Conservation de l'historique des communications avec le client dans le CRM ou l'outil de gestion. Elle garantit la continuité du service même si le vendeur change.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Tout message doit recevoir une réponse dans un délai raisonnable : le silence est perçu comme un manque de considération.</li>
+          <li>Qualifier la demande avant de répondre : comprendre la nature et l'urgence évite les réponses inadaptées.</li>
+          <li>Personnaliser la réponse au contexte du client : consulter son historique avant de répondre.</li>
+          <li>Si la demande dépasse son périmètre, escalader rapidement avec toutes les informations utiles.</li>
+          <li>Tracer chaque échange dans le CRM pour assurer la continuité du service client.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 1</h3></div>
+    <div class="qcm-body" id="qc1">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Un client envoie un message sur Instagram à 9h. Selon les standards actuels de la relation client digitale, dans quel délai maximum faut-il idéalement répondre ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e1_1')"><span class="opt-l">A</span>Dans les 48 heures, les réseaux sociaux n'étant pas un canal prioritaire.</button>
+          <button class="opt" onclick="ans(this,'c','e1_1')"><span class="opt-l">B</span>Dans l'heure, les réseaux sociaux exigeant une réactivité rapide pour éviter une insatisfaction visible publiquement.</button>
+          <button class="opt" onclick="ans(this,'w','e1_1')"><span class="opt-l">C</span>Dans les 5 jours ouvrés, comme pour un courrier postal.</button>
+          <button class="opt" onclick="ans(this,'w','e1_1')"><span class="opt-l">D</span>Uniquement si le message contient une réclamation formelle, sinon aucune réponse n'est nécessaire.</button>
+        </div>
+        <div class="expl" id="e1_1"><strong>Bonne réponse : B.</strong> Les réseaux sociaux sont des espaces publics où les échanges sont visibles de tous. Un message sans réponse rapide envoie un signal négatif non seulement à l'expéditeur mais à tous ses abonnés. Les standards actuels : moins d'1h sur les réseaux sociaux, moins de 24h pour un e-mail. La réactivité est un facteur clé de l'image de marque digitale.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Qu'est-ce que "qualifier une demande client" avant d'y répondre ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e1_2')"><span class="opt-l">A</span>Vérifier si le client est titulaire de la carte de fidélité avant de lui accorder un service.</button>
+          <button class="opt" onclick="ans(this,'c','e1_2')"><span class="opt-l">B</span>Identifier la nature, l'urgence et la complexité de la demande pour apporter la réponse la plus adaptée ou la transmettre au bon interlocuteur.</button>
+          <button class="opt" onclick="ans(this,'w','e1_2')"><span class="opt-l">C</span>Évaluer le potentiel commercial du client avant de décider du niveau de service à lui accorder.</button>
+          <button class="opt" onclick="ans(this,'w','e1_2')"><span class="opt-l">D</span>Classer les messages par ordre alphabétique pour faciliter leur traitement.</button>
+        </div>
+        <div class="expl" id="e1_2"><strong>Bonne réponse : B.</strong> Qualifier une demande, c'est la comprendre avant d'agir : s'agit-il d'une réclamation, d'une question d'information, d'une demande de retour, d'un problème technique ? Est-ce urgent ? Complexe ? La qualification guide la réponse à apporter (directe ou escalade) et évite les réponses standardisées inadaptées.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Pourquoi tracer les échanges avec un client dans le CRM est-il indispensable ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e1_3')"><span class="opt-l">A</span>Pour facturer le client en fonction du nombre d'interactions qu'il a eues avec l'enseigne.</button>
+          <button class="opt" onclick="ans(this,'c','e1_3')"><span class="opt-l">B</span>Pour garantir la continuité du service : si un autre vendeur prend en charge le client, il dispose de tout l'historique nécessaire sans que le client ait à répéter son problème.</button>
+          <button class="opt" onclick="ans(this,'w','e1_3')"><span class="opt-l">C</span>Pour démontrer à la direction le volume de travail réalisé par chaque vendeur.</button>
+          <button class="opt" onclick="ans(this,'w','e1_3')"><span class="opt-l">D</span>Parce que la réglementation impose la conservation de tous les échanges commerciaux pendant 10 ans.</button>
+        </div>
+        <div class="expl" id="e1_3"><strong>Bonne réponse : B.</strong> Rien n'est plus frustrant pour un client que de devoir répéter son problème à chaque interlocuteur. La traçabilité dans le CRM garantit que tout vendeur qui reprend le dossier dispose immédiatement du contexte complet. C'est un gage de professionnalisme et de continuité de service qui renforce la satisfaction et la confiance.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc1')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C2 – Recueillir, extraire, synthétiser les données ===== -->
+<div class="section-card" id="c2">
+  <div class="s-breadcrumb">3.1 Traiter et exploiter l'information ou le contact client › <span>Compétence 2</span></div>
+  <div class="s-title2">Recueillir, extraire, exploiter, synthétiser les données de sources internes et externes</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Sources internes</div><div class="notion-def">Données produites par l'entreprise : CRM, historique d'achats, statistiques de vente, taux de satisfaction interne, résultats des campagnes de fidélisation passées.</div></div>
+        <div class="notion"><div class="notion-term">Sources externes</div><div class="notion-def">Données provenant de l'extérieur : études de marché, avis en ligne, données concurrentes, tendances sectorielles, évolutions réglementaires, comportements d'achat du marché.</div></div>
+        <div class="notion"><div class="notion-term">Extraction de données</div><div class="notion-def">Opération consistant à isoler dans une base de données les informations utiles à une analyse précise : requête dans le CRM, export de fichier, segmentation d'un fichier clients.</div></div>
+        <div class="notion"><div class="notion-term">Synthèse</div><div class="notion-def">Travail de condensation et de structuration des données collectées pour les rendre exploitables : identification des tendances clés, mise en forme claire et concise pour la prise de décision.</div></div>
+        <div class="notion"><div class="notion-term">Fiabilité de la donnée</div><div class="notion-def">Qualité d'une donnée : est-elle récente, vérifiée, cohérente avec d'autres sources ? Une donnée obsolète ou erronée conduit à des décisions commerciales incorrectes.</div></div>
+        <div class="notion"><div class="notion-term">RGPD et données clients</div><div class="notion-def">L'exploitation des données personnelles doit respecter le RGPD : consentement du client, finalité définie, durée de conservation limitée, sécurité garantie.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Croiser sources internes et externes donne une vision plus complète et fiable de la situation commerciale.</li>
+          <li>Une synthèse efficace est courte, structurée et orientée vers la décision : elle sélectionne l'essentiel.</li>
+          <li>Vérifier la fiabilité et la fraîcheur des données avant de les exploiter : une donnée obsolète est trompeuse.</li>
+          <li>Respecter le RGPD dans toute exploitation des données personnelles clients.</li>
+          <li>L'extraction de données dans le CRM nécessite de savoir formuler les bonnes requêtes selon l'objectif visé.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 2</h3></div>
+    <div class="qcm-body" id="qc2">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Pourquoi est-il utile de croiser des sources internes et externes lors de l'analyse des données clients ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e2_1')"><span class="opt-l">A</span>Pour multiplier le volume de données et produire des rapports plus longs.</button>
+          <button class="opt" onclick="ans(this,'c','e2_1')"><span class="opt-l">B</span>Pour obtenir une vision complète : les données internes révèlent les comportements réels des clients de l'enseigne, les données externes montrent les tendances et le contexte de marché.</button>
+          <button class="opt" onclick="ans(this,'w','e2_1')"><span class="opt-l">C</span>Parce que les sources internes seules ne sont pas légalement suffisantes pour prendre des décisions commerciales.</button>
+          <button class="opt" onclick="ans(this,'w','e2_1')"><span class="opt-l">D</span>Pour respecter les recommandations de la norme ISO 9001 applicable aux entreprises commerciales.</button>
+        </div>
+        <div class="expl" id="e2_1"><strong>Bonne réponse : B.</strong> Les sources internes (CRM, statistiques de vente) donnent une vision de ce qui se passe dans l'entreprise. Les sources externes (études de marché, avis en ligne, données concurrentes) montrent le contexte et les tendances du marché. Croiser les deux permet de comprendre non seulement ce que font les clients, mais aussi pourquoi et dans quel contexte.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Qu'est-ce qu'une bonne synthèse de données commerciales ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e2_2')"><span class="opt-l">A</span>Un document exhaustif reproduisant toutes les données collectées sans sélection.</button>
+          <button class="opt" onclick="ans(this,'c','e2_2')"><span class="opt-l">B</span>Un document court, structuré et orienté décision, qui sélectionne les tendances clés et les présente de façon claire pour le destinataire.</button>
+          <button class="opt" onclick="ans(this,'w','e2_2')"><span class="opt-l">C</span>Un graphique unique résumant l'ensemble des données en une seule visualisation.</button>
+          <button class="opt" onclick="ans(this,'w','e2_2')"><span class="opt-l">D</span>Un rapport rédigé exclusivement par le service marketing, sans contribution des vendeurs terrain.</button>
+        </div>
+        <div class="expl" id="e2_2"><strong>Bonne réponse : B.</strong> Une synthèse efficace n'est pas une compilation : elle sélectionne, structure et clarifie. Son objectif est de permettre à son destinataire de comprendre rapidement la situation et de prendre une décision éclairée. Plus elle est longue et complexe, moins elle est utile. La valeur d'une synthèse se mesure à sa clarté et à son utilité opérationnelle.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Pourquoi vérifier la fiabilité d'une donnée avant de l'exploiter ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e2_3')"><span class="opt-l">A</span>Pour satisfaire les exigences du commissaire aux comptes lors de l'audit annuel.</button>
+          <button class="opt" onclick="ans(this,'w','e2_3')"><span class="opt-l">B</span>Parce que les données non vérifiées sont interdites par le RGPD.</button>
+          <button class="opt" onclick="ans(this,'c','e2_3')"><span class="opt-l">C</span>Parce qu'une donnée obsolète, erronée ou incomplète conduit à des décisions commerciales incorrectes qui peuvent nuire à l'entreprise et au client.</button>
+          <button class="opt" onclick="ans(this,'w','e2_3')"><span class="opt-l">D</span>Parce que les clients ont le droit de savoir quelles données les concernant sont utilisées avant toute analyse.</button>
+        </div>
+        <div class="expl" id="e2_3"><strong>Bonne réponse : C.</strong> "Garbage in, garbage out" : des données de mauvaise qualité produisent des analyses de mauvaise qualité. Si le fichier clients contient des adresses obsolètes, les campagnes de fidélisation n'atteignent pas leur cible. Si les données de satisfaction datent de 18 mois, elles ne reflètent plus la réalité actuelle. La qualité de la donnée conditionne la qualité de la décision.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc2')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C3 – Rendre compte des données ===== -->
+<div class="section-card" id="c3">
+  <div class="s-breadcrumb">3.1 Traiter et exploiter l'information ou le contact client › <span>Compétence 3</span></div>
+  <div class="s-title2">Rendre compte des données appropriées</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Compte rendu</div><div class="notion-def">Document ou communication orale restituant les résultats d'une analyse ou d'une action. Il doit être synthétique, factuel, objectif et orienté vers la prise de décision.</div></div>
+        <div class="notion"><div class="notion-term">Données appropriées</div><div class="notion-def">Informations pertinentes pour le destinataire compte tenu de son niveau hiérarchique et de ses besoins de décision. Ne pas tout dire : sélectionner ce qui est utile pour CE destinataire.</div></div>
+        <div class="notion"><div class="notion-term">Rapport écrit</div><div class="notion-def">Document structuré (introduction, développement, conclusion/recommandations) permettant une lecture rapide et une conservation pour référence ultérieure.</div></div>
+        <div class="notion"><div class="notion-term">Compte rendu oral</div><div class="notion-def">Restitution verbale des données lors d'une réunion. Doit être préparé, structuré et adapté au temps disponible. Permet l'échange immédiat et le questionnement.</div></div>
+        <div class="notion"><div class="notion-term">Tableau de bord</div><div class="notion-def">Outil visuel regroupant les indicateurs clés de performance (KPI) sur une page. Il permet un suivi régulier et une comparaison rapide avec les objectifs fixés.</div></div>
+        <div class="notion"><div class="notion-term">Objectivité</div><div class="notion-def">Présentation des données telles qu'elles sont, sans les embellir ni les minimiser. Un compte rendu biaisé (trop positif ou négatif) conduit à de mauvaises décisions.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Rendre compte = sélectionner les données pertinentes pour CE destinataire, pas tout rapporter.</li>
+          <li>Un compte rendu doit être objectif : ne pas embellir les résultats ni minimiser les problèmes.</li>
+          <li>Adapter le format au destinataire : tableau de bord pour la direction, rapport détaillé pour le responsable opérationnel.</li>
+          <li>Le tableau de bord permet un suivi régulier des KPI et une détection rapide des écarts par rapport aux objectifs.</li>
+          <li>Un compte rendu oral nécessite une préparation aussi rigoureuse qu'un rapport écrit.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 3</h3></div>
+    <div class="qcm-body" id="qc3">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Qu'est-ce que des "données appropriées" dans le cadre d'un compte rendu à la hiérarchie ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e3_1')"><span class="opt-l">A</span>Toutes les données collectées sans exception pour montrer l'exhaustivité du travail réalisé.</button>
+          <button class="opt" onclick="ans(this,'c','e3_1')"><span class="opt-l">B</span>Les informations pertinentes pour le niveau de décision du destinataire : ce dont il a besoin pour comprendre et agir, ni plus ni moins.</button>
+          <button class="opt" onclick="ans(this,'w','e3_1')"><span class="opt-l">C</span>Uniquement les données positives, pour motiver l'équipe et maintenir un climat de confiance.</button>
+          <button class="opt" onclick="ans(this,'w','e3_1')"><span class="opt-l">D</span>Les données certifiées par un organisme externe avant d'être présentées à la direction.</button>
+        </div>
+        <div class="expl" id="e3_1"><strong>Bonne réponse : B.</strong> "Appropriées" signifie adaptées au destinataire et à son besoin de décision. Un directeur n'a pas besoin des mêmes informations qu'un responsable terrain. Trop d'informations noient l'essentiel ; trop peu laissent le destinataire sans éléments suffisants pour décider. La pertinence est la qualité première d'un compte rendu efficace.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Qu'est-ce qu'un tableau de bord commercial et à quoi sert-il ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e3_2')"><span class="opt-l">A</span>Un logiciel de caisse enregistreuse permettant de suivre les transactions en temps réel.</button>
+          <button class="opt" onclick="ans(this,'c','e3_2')"><span class="opt-l">B</span>Un outil visuel regroupant les indicateurs clés de performance (KPI) pour suivre régulièrement l'activité et détecter les écarts par rapport aux objectifs.</button>
+          <button class="opt" onclick="ans(this,'w','e3_2')"><span class="opt-l">C</span>Un document administratif récapitulant les contrats signés avec les clients sur une période donnée.</button>
+          <button class="opt" onclick="ans(this,'w','e3_2')"><span class="opt-l">D</span>Un planning de travail permettant d'organiser les tâches des vendeurs sur la semaine.</button>
+        </div>
+        <div class="expl" id="e3_2"><strong>Bonne réponse : B.</strong> Le tableau de bord est l'outil de pilotage par excellence : il concentre sur une seule page les indicateurs les plus importants (CA, NPS, taux de fidélisation, panier moyen…) et leur évolution. Il permet à la direction et aux managers de repérer immédiatement les signaux d'alerte et de décider des ajustements nécessaires sans avoir à éplucher des données brutes.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Pourquoi l'objectivité est-elle indispensable dans un compte rendu ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e3_3')"><span class="opt-l">A</span>Parce que les clients ont accès aux comptes rendus internes et pourraient se plaindre s'ils sont trop positifs.</button>
+          <button class="opt" onclick="ans(this,'w','e3_3')"><span class="opt-l">B</span>Parce que les syndicats exigent des rapports neutres dans le cadre des négociations annuelles.</button>
+          <button class="opt" onclick="ans(this,'c','e3_3')"><span class="opt-l">C</span>Parce qu'un rapport biaisé (trop positif ou négatif) conduit la hiérarchie à prendre de mauvaises décisions basées sur une réalité déformée.</button>
+          <button class="opt" onclick="ans(this,'w','e3_3')"><span class="opt-l">D</span>Parce que les logiciels de CRM détectent automatiquement les données non objectives et les rejettent.</button>
+        </div>
+        <div class="expl" id="e3_3"><strong>Bonne réponse : C.</strong> L'objectivité est la condition de l'utilité d'un compte rendu. Si un vendeur embellit les résultats par crainte de la hiérarchie, celle-ci ne voit pas les vrais problèmes et ne peut pas prendre les bonnes décisions correctives. À l'inverse, un rapport trop alarmiste peut déclencher des actions non justifiées. Présenter les faits tels qu'ils sont est la posture professionnelle qui permet à l'organisation de fonctionner efficacement.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc3')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C4 – Proposer des actions de fidélisation ===== -->
+<div class="section-card" id="c4">
+  <div class="s-breadcrumb">3.1 Traiter et exploiter l'information ou le contact client › <span>Compétence 4</span></div>
+  <div class="s-title2">Proposer des actions de fidélisation en adéquation avec les données et l'orientation commerciale</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Action de fidélisation</div><div class="notion-def">Initiative commerciale visant à encourager un client à répéter ses achats et à renforcer son attachement à l'enseigne : programme de points, offre personnalisée, invitation à un événement.</div></div>
+        <div class="notion"><div class="notion-term">Adéquation données/action</div><div class="notion-def">L'action proposée doit être justifiée par les données disponibles : si les données montrent que les clients "inactifs depuis 6 mois" représentent 20% du fichier, une campagne de réactivation est pertinente.</div></div>
+        <div class="notion"><div class="notion-term">Orientation commerciale</div><div class="notion-def">Stratégie définie par la direction : conquête, fidélisation, montée en gamme, développement d'un segment… L'action proposée doit s'inscrire dans cette orientation.</div></div>
+        <div class="notion"><div class="notion-term">Segmentation pour la fidélisation</div><div class="notion-def">Découpage du fichier clients en groupes homogènes pour proposer des actions adaptées à chaque profil : clients VIP, clients occasionnels, clients inactifs, nouveaux clients.</div></div>
+        <div class="notion"><div class="notion-term">Proposition argumentée</div><div class="notion-def">La proposition d'action doit être accompagnée d'une justification basée sur les données : "X% des clients n'ont pas acheté depuis 3 mois, une offre de réactivation ciblée permettrait de récupérer Y% d'entre eux."</div></div>
+        <div class="notion"><div class="notion-term">Budget fidélisation</div><div class="notion-def">Ressources financières allouées aux actions de fidélisation. La proposition doit tenir compte des contraintes budgétaires et estimer le retour sur investissement attendu.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Une action de fidélisation pertinente est basée sur des données réelles et cohérente avec la stratégie de l'entreprise.</li>
+          <li>Segmenter le fichier clients avant de proposer : une action "taille unique" est moins efficace qu'une action ciblée.</li>
+          <li>La proposition doit être argumentée par les données : montrer pourquoi cette action, pour quel segment, avec quel objectif mesurable.</li>
+          <li>Tenir compte du budget disponible et estimer le ROI attendu pour rendre la proposition réaliste.</li>
+          <li>S'aligner sur l'orientation commerciale de la direction : ne pas proposer une action de conquête si la priorité est la fidélisation.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 4</h3></div>
+    <div class="qcm-body" id="qc4">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Une analyse du CRM montre que 25% des clients n'ont pas acheté depuis plus de 6 mois. Quelle action de fidélisation serait la plus pertinente ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e4_1')"><span class="opt-l">A</span>Envoyer le catalogue de nouveautés à l'ensemble de la base clients.</button>
+          <button class="opt" onclick="ans(this,'c','e4_1')"><span class="opt-l">B</span>Cibler spécifiquement ce segment de clients inactifs avec une offre de réactivation personnalisée (remise, invitation, offre exclusive).</button>
+          <button class="opt" onclick="ans(this,'w','e4_1')"><span class="opt-l">C</span>Supprimer ces clients du fichier car ils ne représentent plus un potentiel commercial.</button>
+          <button class="opt" onclick="ans(this,'w','e4_1')"><span class="opt-l">D</span>Augmenter la publicité en ligne pour attirer de nouveaux clients en remplacement.</button>
+        </div>
+        <div class="expl" id="e4_1"><strong>Bonne réponse : B.</strong> Les données identifient clairement un segment d'inactifs (25% depuis 6 mois) : c'est précisément ce segment qui doit être ciblé par une action de réactivation. Envoyer le catalogue à toute la base est moins efficace et coûteux. Supprimer ces clients est une erreur : un client inactif n'est pas un client perdu, il peut être réactivé avec la bonne approche.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Pourquoi une action de fidélisation doit-elle s'inscrire dans l'orientation commerciale de l'entreprise ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e4_2')"><span class="opt-l">A</span>Parce que la réglementation commerciale impose que toute action soit validée par la direction.</button>
+          <button class="opt" onclick="ans(this,'c','e4_2')"><span class="opt-l">B</span>Pour garantir la cohérence entre les actions terrain et la stratégie globale de l'entreprise, et maximiser l'efficacité collective.</button>
+          <button class="opt" onclick="ans(this,'w','e4_2')"><span class="opt-l">C</span>Parce que les actions qui ne s'inscrivent pas dans l'orientation commerciale sont automatiquement refusées par le système CRM.</button>
+          <button class="opt" onclick="ans(this,'w','e4_2')"><span class="opt-l">D</span>Pour éviter d'avoir à justifier le budget consacré à l'action auprès du service comptable.</button>
+        </div>
+        <div class="expl" id="e4_2"><strong>Bonne réponse : B.</strong> Une action de fidélisation qui va à l'encontre de la stratégie de l'entreprise crée de la confusion et gaspille des ressources. Si la direction a décidé de concentrer les efforts sur le segment "premium", une campagne de promotions agressives ciblant les clients "petits budgets" est contre-productive. L'alignement stratégique garantit la cohérence et l'efficacité collective des actions commerciales.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Qu'est-ce que la segmentation du fichier clients dans le cadre de la fidélisation ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e4_3')"><span class="opt-l">A</span>La suppression des clients inactifs pour ne conserver que les clients actifs dans le fichier.</button>
+          <button class="opt" onclick="ans(this,'w','e4_3')"><span class="opt-l">B</span>Le tri alphabétique du fichier clients pour faciliter la gestion administrative.</button>
+          <button class="opt" onclick="ans(this,'c','e4_3')"><span class="opt-l">C</span>Le découpage du fichier en groupes homogènes (VIP, occasionnels, inactifs, nouveaux…) pour proposer des actions adaptées à chaque profil.</button>
+          <button class="opt" onclick="ans(this,'w','e4_3')"><span class="opt-l">D</span>La répartition équitable du fichier clients entre les vendeurs pour équilibrer les charges de travail.</button>
+        </div>
+        <div class="expl" id="e4_3"><strong>Bonne réponse : C.</strong> La segmentation est le prérequis de toute action de fidélisation efficace. Un client VIP (gros acheteur fidèle) ne doit pas recevoir la même communication qu'un nouveau client ou un client inactif. Chaque segment a ses propres besoins, attentes et leviers de fidélisation. Une action ciblée sur le bon segment est toujours plus efficace et moins coûteuse qu'une action de masse.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc4')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C5 – Sélectionner et mettre en œuvre les outils de fidélisation ===== -->
+<div class="section-card" id="c5">
+  <div class="s-breadcrumb">3.2 Contribuer aux actions de fidélisation › <span>Compétence 5</span></div>
+  <div class="s-title2">Sélectionner et mettre en œuvre les outils de fidélisation de l'entreprise</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Programme de fidélité</div><div class="notion-def">Dispositif structuré récompensant les clients réguliers : carte de fidélité, points cumulables, remises progressives, avantages exclusifs. Il encourage la répétition d'achat et la collecte de données comportementales.</div></div>
+        <div class="notion"><div class="notion-term">E-mailing ciblé</div><div class="notion-def">Envoi d'e-mails personnalisés à des segments précis de clients selon leur profil et leur historique. Outil de fidélisation direct, mesurable et à faible coût unitaire.</div></div>
+        <div class="notion"><div class="notion-term">Offre personnalisée</div><div class="notion-def">Proposition commerciale adaptée aux préférences et à l'historique d'achat d'un client spécifique. Exemple : "Nous avons sélectionné ces produits pour vous" sur la base des achats précédents.</div></div>
+        <div class="notion"><div class="notion-term">Parrainage</div><div class="notion-def">Programme incitant les clients satisfaits à recommander l'enseigne à leur entourage contre une récompense (bon de réduction, points). Il combine fidélisation et conquête à moindre coût.</div></div>
+        <div class="notion"><div class="notion-term">Adéquation outil/client</div><div class="notion-def">Le choix de l'outil de fidélisation doit correspondre au profil du client : un client senior préférera un courrier postal ou un appel ; un client digital préférera une appli ou un e-mail.</div></div>
+        <div class="notion"><div class="notion-term">Coût de fidélisation</div><div class="notion-def">Investissement nécessaire pour maintenir un client actif. En moyenne 5 à 7 fois moins coûteux que la conquête d'un nouveau client. Argument clé pour justifier les budgets fidélisation.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Fidéliser coûte <strong>5 à 7 fois moins cher</strong> que conquérir : argument clé pour justifier les budgets fidélisation.</li>
+          <li>Choisir l'outil adapté au profil du client : canal, âge, comportement digital, fréquence d'achat.</li>
+          <li>Un programme de fidélité bien conçu collecte des données comportementales précieuses en plus de fidéliser.</li>
+          <li>L'e-mailing ciblé est efficace uniquement si la segmentation est pertinente et le message personnalisé.</li>
+          <li>Le parrainage combine fidélisation des clients existants et conquête de nouveaux clients à moindre coût.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 5</h3></div>
+    <div class="qcm-body" id="qc5">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Pourquoi le parrainage est-il considéré comme un outil de fidélisation et de conquête à la fois ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e5_1')"><span class="opt-l">A</span>Parce qu'il permet de racheter les clients perdus grâce à une offre de retour attractive.</button>
+          <button class="opt" onclick="ans(this,'c','e5_1')"><span class="opt-l">B</span>Parce qu'il récompense le client existant (fidélisation) tout en incitant son entourage à devenir client (conquête), le tout à moindre coût.</button>
+          <button class="opt" onclick="ans(this,'w','e5_1')"><span class="opt-l">C</span>Parce qu'il remplace avantageusement toutes les autres formes de publicité.</button>
+          <button class="opt" onclick="ans(this,'w','e5_1')"><span class="opt-l">D</span>Parce qu'il oblige le client à acheter plus souvent pour accumuler suffisamment de points de parrainage.</button>
+        </div>
+        <div class="expl" id="e5_1"><strong>Bonne réponse : B.</strong> Le parrainage a un double effet : le client parrain est récompensé (bon de réduction, points) ce qui renforce sa fidélité ; le filleul découvert arrive avec une recommandation de confiance ce qui facilite sa conversion. C'est un outil doublement efficace à un coût faible, car le client lui-même fait le travail de recrutement.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Pourquoi l'adéquation entre l'outil de fidélisation et le profil du client est-elle importante ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e5_2')"><span class="opt-l">A</span>Parce que la réglementation interdit d'utiliser le même outil pour tous les clients.</button>
+          <button class="opt" onclick="ans(this,'c','e5_2')"><span class="opt-l">B</span>Parce qu'un outil inadapté au profil du client sera ignoré ou mal reçu, réduisant à néant l'investissement consacré à l'action.</button>
+          <button class="opt" onclick="ans(this,'w','e5_2')"><span class="opt-l">C</span>Parce que les fournisseurs d'outils de fidélisation imposent des critères de segmentation dans leurs contrats.</button>
+          <button class="opt" onclick="ans(this,'w','e5_2')"><span class="opt-l">D</span>Parce que les clients âgés refusent systématiquement tous les programmes de fidélité numériques.</button>
+        </div>
+        <div class="expl" id="e5_2"><strong>Bonne réponse : B.</strong> Envoyer une offre de fidélisation via une appli mobile à un client senior non équipé de smartphone, ou un courrier postal à un client ultra-connecté qui ne le consulte plus, c'est gaspiller un budget pour rien. L'outil doit correspondre au canal préféré du client, à ses habitudes digitales et à son profil comportemental pour avoir le moindre impact.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Quel argument économique justifie l'investissement dans les outils de fidélisation ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e5_3')"><span class="opt-l">A</span>Les outils de fidélisation sont entièrement financés par les fournisseurs dans le cadre des accords commerciaux.</button>
+          <button class="opt" onclick="ans(this,'c','e5_3')"><span class="opt-l">B</span>Fidéliser un client existant coûte en moyenne 5 à 7 fois moins cher que d'en conquérir un nouveau, ce qui rend l'investissement clairement rentable.</button>
+          <button class="opt" onclick="ans(this,'w','e5_3')"><span class="opt-l">C</span>Les clients fidélisés dépensent toujours plus que les nouveaux clients dès leur premier achat.</button>
+          <button class="opt" onclick="ans(this,'w','e5_3')"><span class="opt-l">D</span>La fidélisation est obligatoire par la réglementation commerciale pour les entreprises réalisant plus de 1M€ de CA.</button>
+        </div>
+        <div class="expl" id="e5_3"><strong>Bonne réponse : B.</strong> L'argument économique de la fidélisation est fondamental : acquérir un nouveau client (publicité, démarchage, temps de vente) coûte en moyenne 5 à 7 fois plus cher que de maintenir un client existant. De plus, les clients fidèles achètent plus souvent, en plus grande quantité, et recommandent l'enseigne. Le ROI de la fidélisation est systématiquement supérieur à celui de la conquête pure.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc5')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C6 – Préparer et organiser les événements ===== -->
+<div class="section-card" id="c6">
+  <div class="s-breadcrumb">3.2 Contribuer aux actions de fidélisation › <span>Compétence 6</span></div>
+  <div class="s-title2">Concourir à la préparation et à l'organisation d'événements/opérations de fidélisation</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Événement commercial</div><div class="notion-def">Action ponctuelle destinée à dynamiser les ventes et renforcer la relation client : vente privée, journée portes ouvertes, démonstration produit, anniversaire de l'enseigne, journée VIP.</div></div>
+        <div class="notion"><div class="notion-term">Rétro-planning</div><div class="notion-def">Planification à rebours depuis la date de l'événement : identifier toutes les tâches à réaliser et les planifier dans l'ordre inverse pour ne rien oublier et respecter les délais.</div></div>
+        <div class="notion"><div class="notion-term">Brief événementiel</div><div class="notion-def">Document de cadrage définissant les objectifs, le public cible, le budget, la date, le lieu et les indicateurs de réussite de l'événement. Il guide toute la préparation.</div></div>
+        <div class="notion"><div class="notion-term">Invitation et communication</div><div class="notion-def">Outils de promotion de l'événement : e-mail d'invitation, SMS, publication sur les réseaux sociaux, affichage en magasin. Doivent être envoyés suffisamment tôt pour permettre la participation.</div></div>
+        <div class="notion"><div class="notion-term">Logistique événementielle</div><div class="notion-def">Organisation pratique de l'événement : espace aménagé, matériel disponible, équipe en place, accueil prévu, supports de communication prêts. Une mauvaise logistique ruine même la meilleure idée.</div></div>
+        <div class="notion"><div class="notion-term">Budget événementiel</div><div class="notion-def">Estimation et suivi des coûts liés à l'événement : communication, décoration, animation, catering, personnel. Il doit être maîtrisé et comparé au ROI attendu pour valider la rentabilité.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Définir clairement les objectifs de l'événement avant de se lancer dans l'organisation : conquête ? fidélisation ? montée en gamme ?</li>
+          <li>Utiliser un rétro-planning pour ne rien oublier et respecter tous les délais de préparation.</li>
+          <li>Communiquer l'invitation suffisamment tôt : trop tard = peu de participants, trop tôt = oubli.</li>
+          <li>La logistique est aussi importante que le contenu : un événement mal organisé laisse une mauvaise impression.</li>
+          <li>Estimer le ROI attendu avant l'événement pour justifier le budget et évaluer son efficacité après.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 6</h3></div>
+    <div class="qcm-body" id="qc6">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Qu'est-ce qu'un rétro-planning dans le cadre de l'organisation d'un événement commercial ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e6_1')"><span class="opt-l">A</span>Un compte rendu rédigé après l'événement pour évaluer ce qui a bien ou mal fonctionné.</button>
+          <button class="opt" onclick="ans(this,'c','e6_1')"><span class="opt-l">B</span>Une planification à rebours depuis la date de l'événement, listant toutes les tâches dans l'ordre inverse pour garantir le respect de tous les délais.</button>
+          <button class="opt" onclick="ans(this,'w','e6_1')"><span class="opt-l">C</span>Un outil permettant de comparer les résultats de l'événement actuel avec ceux des éditions précédentes.</button>
+          <button class="opt" onclick="ans(this,'w','e6_1')"><span class="opt-l">D</span>Le planning de travail des vendeurs pendant la période précédant les fêtes de fin d'année.</button>
+        </div>
+        <div class="expl" id="e6_1"><strong>Bonne réponse : B.</strong> Le rétro-planning est la méthode de planification la plus efficace pour les événements. On part de la date J (l'événement) et on remonte dans le temps : J-1 : vérification logistique ; J-3 : relance des inscriptions ; J-7 : envoi des invitations ; J-14 : finalisation du programme… Cette méthode garantit qu'aucune étape n'est oubliée et que les délais sont tous respectés.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Quand faut-il idéalement envoyer les invitations pour un événement commercial ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e6_2')"><span class="opt-l">A</span>La veille de l'événement pour créer un effet de surprise et d'urgence.</button>
+          <button class="opt" onclick="ans(this,'c','e6_2')"><span class="opt-l">B</span>Suffisamment à l'avance pour que les clients puissent s'organiser, sans être si tôt que l'invitation soit oubliée.</button>
+          <button class="opt" onclick="ans(this,'w','e6_2')"><span class="opt-l">C</span>Le jour même de l'événement, car les clients modernes consultent leurs messages en temps réel.</button>
+          <button class="opt" onclick="ans(this,'w','e6_2')"><span class="opt-l">D</span>Trois mois avant l'événement pour maximiser le taux de participation.</button>
+        </div>
+        <div class="expl" id="e6_2"><strong>Bonne réponse : B.</strong> Le timing d'invitation est un équilibre : trop tôt (3 mois) et le client oublie ; trop tard (veille) et il ne peut pas s'organiser. Pour un événement local, 2 à 3 semaines avant est généralement optimal, avec un rappel 3 à 5 jours avant. Ce délai laisse le temps de s'inscrire, de se libérer et de maintenir l'intérêt jusqu'au jour J.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Pourquoi la logistique d'un événement est-elle aussi importante que son contenu ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e6_3')"><span class="opt-l">A</span>Parce que les clients jugent les événements uniquement sur leur organisation pratique, pas sur leur contenu.</button>
+          <button class="opt" onclick="ans(this,'c','e6_3')"><span class="opt-l">B</span>Parce qu'une mauvaise organisation (accueil raté, matériel manquant, désordre) détruit l'impression générale même si le contenu est excellent.</button>
+          <button class="opt" onclick="ans(this,'w','e6_3')"><span class="opt-l">C</span>Parce que les coûts logistiques représentent toujours plus de 80% du budget d'un événement commercial.</button>
+          <button class="opt" onclick="ans(this,'w','e6_3')"><span class="opt-l">D</span>Parce que la réglementation impose des normes logistiques strictes pour tous les événements commerciaux.</button>
+        </div>
+        <div class="expl" id="e6_3"><strong>Bonne réponse : B.</strong> L'expérience d'un événement est globale : même une excellente présentation produit sera ternie par un accueil désorganisé, un matériel défaillant ou une salle mal agencée. Le client retient l'expérience dans son ensemble. Soigner la logistique (accueil, espace, équipe briefée, matériel prêt) est la condition indispensable pour que le fond (contenu, offres) soit bien reçu.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc6')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C7 – Participer à la mise en œuvre des événements ===== -->
+<div class="section-card" id="c7">
+  <div class="s-breadcrumb">3.2 Contribuer aux actions de fidélisation › <span>Compétence 7</span></div>
+  <div class="s-title2">Participer à la mise en œuvre des événements et opérations de fidélisation</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Rôle du vendeur pendant l'événement</div><div class="notion-def">Le vendeur est le contact humain principal lors d'un événement. Il accueille, conseille, anime, conclut des ventes et recueille des informations sur les clients présents.</div></div>
+        <div class="notion"><div class="notion-term">Accueil événementiel</div><div class="notion-def">Première impression lors de l'événement : sourire, tenue soignée, badge, mot de bienvenue personnalisé. Il conditionne l'atmosphère générale et la réceptivité des clients.</div></div>
+        <div class="notion"><div class="notion-term">Animation commerciale</div><div class="notion-def">Techniques pour dynamiser l'événement et maintenir l'intérêt des participants : démonstration, jeu concours, tirage au sort, présentation produit, dégustation ou essai.</div></div>
+        <div class="notion"><div class="notion-term">Opportunité de vente</div><div class="notion-def">Un événement de fidélisation crée naturellement des opportunités commerciales : clients détendus, en confiance, ouverts aux découvertes. Le vendeur doit savoir les détecter et les saisir sans forcer.</div></div>
+        <div class="notion"><div class="notion-term">Collecte d'informations</div><div class="notion-def">Pendant l'événement, le vendeur recueille des informations précieuses : besoins exprimés, intérêts, projets futurs, feedback sur les produits. Ces données enrichissent le CRM.</div></div>
+        <div class="notion"><div class="notion-term">Gestion des incidents</div><div class="notion-def">Capacité à gérer les imprévus lors d'un événement (client mécontent, problème technique, retard) avec calme et professionnalisme pour préserver l'atmosphère générale.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>L'événement est une opportunité commerciale doublée d'une occasion de collecte d'informations clients.</li>
+          <li>L'accueil lors de l'événement est aussi important que l'accueil en magasin : soigner la première impression.</li>
+          <li>Saisir les opportunités de vente sans forcer : l'atmosphère détendue d'un événement facilite les décisions d'achat.</li>
+          <li>Gérer les incidents avec calme : un incident bien géré lors d'un événement peut même renforcer l'image de l'enseigne.</li>
+          <li>Collecter et noter les informations recueillies pendant l'événement pour les intégrer dans le CRM après.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 7</h3></div>
+    <div class="qcm-body" id="qc7">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Lors d'une vente privée, un client manifeste de l'intérêt pour un produit sans demander à être servi. Que doit faire le vendeur ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e7_1')"><span class="opt-l">A</span>Attendre que le client prenne l'initiative de solliciter le vendeur.</button>
+          <button class="opt" onclick="ans(this,'c','e7_1')"><span class="opt-l">B</span>Détecter ce signal d'intérêt et aborder le client naturellement pour engager la conversation et saisir l'opportunité de vente.</button>
+          <button class="opt" onclick="ans(this,'w','e7_1')"><span class="opt-l">C</span>Lui remettre immédiatement une fiche produit sans lui parler pour ne pas paraître intrusif.</button>
+          <button class="opt" onclick="ans(this,'w','e7_1')"><span class="opt-l">D</span>Demander à un collègue de s'en occuper car le vendeur est occupé à animer l'événement.</button>
+        </div>
+        <div class="expl" id="e7_1"><strong>Bonne réponse : B.</strong> Un client qui s'attarde sur un produit envoie un signal d'intérêt clair. L'événement crée une atmosphère détendue et propice à l'échange. Le vendeur doit saisir cette opportunité naturellement, sans pression, en engageant la conversation autour du produit. C'est exactement l'objectif d'un événement commercial : créer ces moments d'échange privilégiés.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Pourquoi un événement de fidélisation est-il aussi une opportunité de collecte d'informations ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e7_2')"><span class="opt-l">A</span>Parce que les clients signent obligatoirement un formulaire RGPD à leur arrivée.</button>
+          <button class="opt" onclick="ans(this,'c','e7_2')"><span class="opt-l">B</span>Parce que les clients présents sont détendus et en confiance, ce qui les rend plus enclins à partager leurs besoins, projets et retours sur les produits.</button>
+          <button class="opt" onclick="ans(this,'w','e7_2')"><span class="opt-l">C</span>Parce que c'est la seule occasion légale de collecter des données personnelles sans le consentement préalable du client.</button>
+          <button class="opt" onclick="ans(this,'w','e7_2')"><span class="opt-l">D</span>Parce que les clients font plus d'achats lors des événements et génèrent donc plus de données transactionnelles.</button>
+        </div>
+        <div class="expl" id="e7_2"><strong>Bonne réponse : B.</strong> L'atmosphère d'un événement (convivialité, confiance renforcée) favorise les échanges informels. Les clients parlent spontanément de leurs projets, de leurs besoins futurs, de ce qu'ils aiment ou n'aiment pas dans les produits. Le vendeur doit être à l'écoute de ces informations précieuses et les noter pour les intégrer dans le CRM après l'événement.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Comment un vendeur doit-il gérer un incident (client mécontent, problème technique) lors d'un événement ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e7_3')"><span class="opt-l">A</span>Ignorer l'incident pour ne pas perturber les autres clients présents lors de l'événement.</button>
+          <button class="opt" onclick="ans(this,'w','e7_3')"><span class="opt-l">B</span>Interrompre l'événement et s'excuser publiquement auprès de tous les clients présents.</button>
+          <button class="opt" onclick="ans(this,'c','e7_3')"><span class="opt-l">C</span>Gérer l'incident avec calme et discrétion, prendre en charge le client concerné sans perturber les autres participants.</button>
+          <button class="opt" onclick="ans(this,'w','e7_3')"><span class="opt-l">D</span>Demander au client de revenir le lendemain car l'événement n'est pas le bon moment pour traiter les incidents.</button>
+        </div>
+        <div class="expl" id="e7_3"><strong>Bonne réponse : C.</strong> La gestion d'un incident lors d'un événement requiert discrétion et calme : prendre en charge le client concerné à l'écart pour ne pas contaminer l'atmosphère générale, traiter son problème avec professionnalisme, puis revenir vers les autres participants. Un incident bien géré peut même renforcer la confiance des témoins dans le professionnalisme de l'enseigne.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc7')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C8 – Effectuer des ventes au rebond ===== -->
+<div class="section-card" id="c8">
+  <div class="s-breadcrumb">3.2 Contribuer aux actions de fidélisation › <span>Compétence 8</span></div>
+  <div class="s-title2">Effectuer des ventes au rebond</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Vente au rebond</div><div class="notion-def">Proposition commerciale faite lors d'un contact client initié pour une autre raison (réclamation, suivi de commande, demande d'information). Elle transforme un contact "coût" en opportunité de CA.</div></div>
+        <div class="notion"><div class="notion-term">Contexte favorable</div><div class="notion-def">La vente au rebond n'est possible que si le problème initial a d'abord été résolu satisfaisamment. Proposer une vente sans avoir traité la réclamation est contre-productif et mal perçu.</div></div>
+        <div class="notion"><div class="notion-term">Détection d'opportunité</div><div class="notion-def">Lors du contact, le vendeur écoute attentivement pour détecter un besoin non exprimé, un projet futur, une ouverture qui justifie une proposition commerciale pertinente.</div></div>
+        <div class="notion"><div class="notion-term">Proposition non intrusive</div><div class="notion-def">La vente au rebond doit être légère et naturelle, jamais pressante. Le client ne doit pas avoir l'impression que la résolution de son problème était conditionnée à un achat.</div></div>
+        <div class="notion"><div class="notion-term">Moment opportun</div><div class="notion-def">La proposition commerciale intervient seulement après la résolution complète du problème et le retour au calme du client. Proposer trop tôt détériore la relation.</div></div>
+        <div class="notion"><div class="notion-term">Valeur pour le client</div><div class="notion-def">La proposition au rebond doit apporter une vraie valeur au client (résoudre un besoin réel). Une proposition générique ou hors sujet est perçue comme du "forcing" et nuit à la relation.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>La vente au rebond transforme un contact "coût" (réclamation, SAV) en opportunité commerciale.</li>
+          <li>Condition sine qua non : le problème initial doit être résolu <strong>avant</strong> toute proposition commerciale.</li>
+          <li>La proposition doit être pertinente, légère et non intrusive : jamais perçue comme du forcing.</li>
+          <li>Détecter l'opportunité pendant l'écoute : un besoin exprimé, un projet mentionné, une ouverture naturelle.</li>
+          <li>Accepter sans insistance si le client décline : l'objectif principal reste la satisfaction et la fidélisation.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 8</h3></div>
+    <div class="qcm-body" id="qc8">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Qu'est-ce que la vente au rebond ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e8_1')"><span class="opt-l">A</span>Une technique pour récupérer un client qui a refusé un premier argumentaire de vente.</button>
+          <button class="opt" onclick="ans(this,'c','e8_1')"><span class="opt-l">B</span>Une proposition commerciale faite lors d'un contact client initié pour une autre raison, transformant un contact "coût" en opportunité de chiffre d'affaires.</button>
+          <button class="opt" onclick="ans(this,'w','e8_1')"><span class="opt-l">C</span>Une vente réalisée après qu'un client a retourné un produit défectueux.</button>
+          <button class="opt" onclick="ans(this,'w','e8_1')"><span class="opt-l">D</span>Une remise accordée pour compenser une mauvaise expérience et inciter à un nouvel achat immédiat.</button>
+        </div>
+        <div class="expl" id="e8_1"><strong>Bonne réponse : B.</strong> La vente au rebond exploite un contact existant (réclamation, suivi commande, demande info) pour détecter et saisir une opportunité commerciale. Ce contact aurait eu lieu de toute façon ; il représente donc un "coût". Si une vente en résulte, la rentabilité de ce contact s'améliore significativement. La clé est que le problème initial soit d'abord résolu.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>À quel moment de l'échange peut-on introduire une proposition commerciale lors d'une vente au rebond ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e8_2')"><span class="opt-l">A</span>Dès le début de l'appel, avant même d'écouter la raison du contact du client.</button>
+          <button class="opt" onclick="ans(this,'w','e8_2')"><span class="opt-l">B</span>Pendant le traitement de la réclamation pour distraire le client et adoucir son mécontentement.</button>
+          <button class="opt" onclick="ans(this,'c','e8_2')"><span class="opt-l">C</span>Uniquement après la résolution complète du problème initial et le retour au calme du client.</button>
+          <button class="opt" onclick="ans(this,'w','e8_2')"><span class="opt-l">D</span>À la fin de chaque appel, systématiquement, quelle que soit la nature de l'échange.</button>
+        </div>
+        <div class="expl" id="e8_2"><strong>Bonne réponse : C.</strong> La séquence est impérative : d'abord résoudre le problème du client complètement, s'assurer qu'il est satisfait de la solution, puis seulement détecter s'il existe une opportunité commerciale pertinente. Proposer une vente alors que le client est encore insatisfait ou en colère est une faute professionnelle qui aggrave la situation.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Un client appelle pour signaler un retard de livraison. Une fois le problème résolu, il mentionne qu'il réfléchit à équiper sa maison de connecté. Que faire ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e8_3')"><span class="opt-l">A</span>Ne rien faire : ce n'est pas le bon moment car le client vient de se plaindre.</button>
+          <button class="opt" onclick="ans(this,'c','e8_3')"><span class="opt-l">B</span>Saisir naturellement cette ouverture pour proposer une gamme ou un rendez-vous en magasin, de façon légère et non pressante.</button>
+          <button class="opt" onclick="ans(this,'w','e8_3')"><span class="opt-l">C</span>Transférer immédiatement le client au département domotique sans continuer l'échange.</button>
+          <button class="opt" onclick="ans(this,'w','e8_3')"><span class="opt-l">D</span>Lui envoyer automatiquement un catalogue par e-mail sans en parler lors de l'appel.</button>
+        </div>
+        <div class="expl" id="e8_3"><strong>Bonne réponse : B.</strong> La mention d'un projet futur est une ouverture naturelle à une vente au rebond. Le problème ayant été résolu et le client étant à nouveau détendu, le vendeur peut naturellement rebondir : "À propos, puisque vous réfléchissez à la domotique, nous venons justement de recevoir une nouvelle gamme. Je peux vous envoyer des informations ou vous proposer un rendez-vous en magasin si vous le souhaitez." Léger, pertinent, non intrusif.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc8')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C9 – Suivi post-événement ===== -->
+<div class="section-card" id="c9">
+  <div class="s-breadcrumb">3.2 Contribuer aux actions de fidélisation › <span>Compétence 9</span></div>
+  <div class="s-title2">Réaliser les opérations de suivi post-événement</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Suivi post-événement</div><div class="notion-def">Ensemble des actions réalisées après un événement commercial : remerciements, relances des prospects, mise à jour du CRM, bilan chiffré, analyse des retours clients.</div></div>
+        <div class="notion"><div class="notion-term">E-mail de remerciement</div><div class="notion-def">Message envoyé aux participants pour les remercier de leur présence, rappeler les offres présentées et maintenir la relation dans la foulée de l'événement.</div></div>
+        <div class="notion"><div class="notion-term">Relance des prospects chauds</div><div class="notion-def">Contact personnalisé avec les participants ayant manifesté un intérêt pour un produit ou service lors de l'événement, sans avoir conclu. La relance doit intervenir rapidement, idéalement J+1 ou J+2.</div></div>
+        <div class="notion"><div class="notion-term">Mise à jour du CRM</div><div class="notion-def">Intégration dans le CRM de toutes les informations collectées pendant l'événement : nouveaux contacts, intérêts exprimés, projets mentionnés, préférences relevées.</div></div>
+        <div class="notion"><div class="notion-term">Bilan de l'événement</div><div class="notion-def">Analyse comparative entre les objectifs fixés et les résultats obtenus : nombre de participants, CA réalisé, nouvelles opportunités détectées, taux de satisfaction des participants.</div></div>
+        <div class="notion"><div class="notion-term">Mémoire événementielle</div><div class="notion-def">Documentation de l'événement (photos, bilan, retours) conservée pour préparer les prochaines éditions plus efficacement. Elle constitue une base d'apprentissage pour l'équipe.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Le suivi post-événement est aussi important que la préparation : il capitalise sur les investissements réalisés.</li>
+          <li>Relancer les prospects chauds <strong>rapidement</strong> (J+1 ou J+2) : l'intérêt manifesté s'estompe vite.</li>
+          <li>Envoyer un e-mail de remerciement maintient le lien et rappelle les offres présentées.</li>
+          <li>Mettre à jour le CRM immédiatement après : les informations collectées s'oublient vite.</li>
+          <li>Réaliser un bilan chiffré pour évaluer l'efficacité de l'événement et améliorer les prochaines éditions.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 9</h3></div>
+    <div class="qcm-body" id="qc9">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Pourquoi relancer rapidement les prospects chauds après un événement (J+1 ou J+2) ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e9_1')"><span class="opt-l">A</span>Parce que la réglementation commerciale impose un délai maximum de 48h pour toute relance après un événement.</button>
+          <button class="opt" onclick="ans(this,'c','e9_1')"><span class="opt-l">B</span>Parce que l'intérêt manifesté lors de l'événement s'estompe rapidement : plus on attend, moins le prospect se souvient de l'échange et moins il est réceptif.</button>
+          <button class="opt" onclick="ans(this,'w','e9_1')"><span class="opt-l">C</span>Parce que les prospects chauds risquent de contacter eux-mêmes des concurrents s'ils ne reçoivent pas un appel dans les 24 heures.</button>
+          <button class="opt" onclick="ans(this,'w','e9_1')"><span class="opt-l">D</span>Parce que la relance rapide permet de vérifier que le prospect n'a pas changé d'avis entre l'événement et la vente.</button>
+        </div>
+        <div class="expl" id="e9_1"><strong>Bonne réponse : B.</strong> La mémoire et l'enthousiasme d'un événement décroissent rapidement. Relancer J+1 ou J+2, c'est contacter le prospect quand le souvenir de l'échange est encore frais, quand l'enthousiasme est encore présent et quand la proposition peut s'inscrire naturellement dans la continuité de la conversation amorcée lors de l'événement. Attendre une semaine, c'est souvent perdre l'opportunité.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Quelles informations faut-il impérativement intégrer dans le CRM après un événement ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e9_2')"><span class="opt-l">A</span>Uniquement les ventes conclues lors de l'événement, les autres informations étant non pertinentes.</button>
+          <button class="opt" onclick="ans(this,'c','e9_2')"><span class="opt-l">B</span>Tous les contacts établis, les intérêts et projets exprimés par les clients, les préférences relevées et les opportunités détectées pour les exploiter lors de futures actions.</button>
+          <button class="opt" onclick="ans(this,'w','e9_2')"><span class="opt-l">C</span>Le nombre de participants et le chiffre d'affaires réalisé seulement, pour le bilan financier.</button>
+          <button class="opt" onclick="ans(this,'w','e9_2')"><span class="opt-l">D</span>Les informations uniquement sur les nouveaux clients, les clients existants étant déjà dans le CRM.</button>
+        </div>
+        <div class="expl" id="e9_2"><strong>Bonne réponse : B.</strong> Un événement génère une richesse d'informations au-delà des ventes : projets futurs mentionnés, produits suscitant l'intérêt sans achat, retours sur les produits actuels, nouveaux contacts, préférences exprimées. Toutes ces informations doivent enrichir le CRM immédiatement car elles permettront des actions commerciales personnalisées futures bien plus efficaces.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>À quoi sert le bilan d'un événement commercial ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e9_3')"><span class="opt-l">A</span>À justifier le budget dépensé auprès du service comptable de l'entreprise.</button>
+          <button class="opt" onclick="ans(this,'w','e9_3')"><span class="opt-l">B</span>À informer les clients de l'enseigne des résultats commerciaux obtenus lors de l'événement.</button>
+          <button class="opt" onclick="ans(this,'c','e9_3')"><span class="opt-l">C</span>À évaluer l'efficacité de l'événement (objectifs vs résultats), identifier ce qui a fonctionné ou non et améliorer les prochaines éditions.</button>
+          <button class="opt" onclick="ans(this,'w','e9_3')"><span class="opt-l">D</span>À décider si l'équipe mérite une prime en fonction du CA réalisé pendant l'événement.</button>
+        </div>
+        <div class="expl" id="e9_3"><strong>Bonne réponse : C.</strong> Le bilan post-événement est un outil d'apprentissage et d'amélioration continue : comparer les objectifs fixés (nombre de participants, CA visé, nouveaux contacts espérés) aux résultats réels permet d'identifier les points forts à reproduire et les points faibles à corriger. Sans bilan, chaque événement repart de zéro sans capitaliser sur l'expérience accumulée.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc9')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C10 – Mobiliser internet et réseaux sociaux ===== -->
+<div class="section-card" id="c10">
+  <div class="s-breadcrumb">3.2 Contribuer aux actions de fidélisation › <span>Compétence 10</span></div>
+  <div class="s-title2">Mobiliser les outils d'internet et les réseaux sociaux</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Réseaux sociaux commerciaux</div><div class="notion-def">Plateformes utilisées pour la relation client et la fidélisation : Instagram, Facebook, LinkedIn, TikTok, Pinterest. Chacun a ses codes, son audience et ses formats de contenu.</div></div>
+        <div class="notion"><div class="notion-term">Community management</div><div class="notion-def">Animation de la présence d'une marque sur les réseaux sociaux : publication de contenu, réponse aux commentaires, gestion des messages privés. Vise à créer et animer une communauté engagée.</div></div>
+        <div class="notion"><div class="notion-term">E-réputation</div><div class="notion-def">Image de l'entreprise sur internet : avis Google, commentaires Facebook, mentions sur les réseaux. Elle doit être surveillée activement car elle influence directement les décisions d'achat.</div></div>
+        <div class="notion"><div class="notion-term">Contenu engageant</div><div class="notion-def">Publication qui génère des interactions (likes, commentaires, partages, clics) : tutoriels, conseils d'utilisation, coulisses de l'enseigne, offres exclusives réservées aux abonnés.</div></div>
+        <div class="notion"><div class="notion-term">Gestion des avis en ligne</div><div class="notion-def">Pratique consistant à répondre publiquement aux avis clients (positifs et négatifs) sur Google, Trustpilot… Une réponse professionnelle à un avis négatif améliore l'image de l'enseigne.</div></div>
+        <div class="notion"><div class="notion-term">Social selling</div><div class="notion-def">Utilisation des réseaux sociaux pour identifier des prospects, entretenir des relations et créer des opportunités commerciales. Le vendeur devient un acteur de la fidélisation digitale.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Chaque réseau social a ses codes : contenu adapté à Instagram ≠ LinkedIn ≠ TikTok.</li>
+          <li>Surveiller et répondre aux avis en ligne : une réponse professionnelle à un avis négatif améliore l'image.</li>
+          <li>Créer du contenu engageant, pas seulement promotionnel : les clients suivent les enseignes qui leur apportent de la valeur.</li>
+          <li>L'e-réputation influence directement les décisions d'achat : une mauvaise note sur Google fait fuir les prospects.</li>
+          <li>Le vendeur peut être un acteur de la fidélisation digitale en partageant du contenu et en interagissant avec la communauté.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 10</h3></div>
+    <div class="qcm-body" id="qc10">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Pourquoi est-il important de répondre publiquement aux avis négatifs sur Google ou Trustpilot ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e10_1')"><span class="opt-l">A</span>Pour contredire le client et rétablir la vérité devant tous les lecteurs.</button>
+          <button class="opt" onclick="ans(this,'w','e10_1')"><span class="opt-l">B</span>Parce que ne pas répondre expose l'entreprise à des poursuites judiciaires.</button>
+          <button class="opt" onclick="ans(this,'c','e10_1')"><span class="opt-l">C</span>Parce qu'une réponse professionnelle, empathique et constructive montre à tous les lecteurs que l'enseigne prend les retours au sérieux et cherche à s'améliorer.</button>
+          <button class="opt" onclick="ans(this,'w','e10_1')"><span class="opt-l">D</span>Pour faire remonter l'avis en première position afin qu'il soit plus visible que les avis positifs.</button>
+        </div>
+        <div class="expl" id="e10_1"><strong>Bonne réponse : C.</strong> Un avis négatif sans réponse laisse une mauvaise impression durable. Une réponse professionnelle et empathique ("Nous sommes désolés de votre expérience, voici comment nous allons traiter votre situation…") est lue par tous les futurs clients qui consultent les avis. Elle transforme une critique publique en démonstration du sérieux de l'enseigne.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Qu'est-ce que le community management dans une enseigne commerciale ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e10_2')"><span class="opt-l">A</span>La gestion des associations locales partenaires de l'enseigne pour des actions de proximité.</button>
+          <button class="opt" onclick="ans(this,'c','e10_2')"><span class="opt-l">B</span>L'animation de la présence de l'enseigne sur les réseaux sociaux : publications, réponses aux commentaires, gestion des messages, création d'une communauté engagée.</button>
+          <button class="opt" onclick="ans(this,'w','e10_2')"><span class="opt-l">C</span>La formation des vendeurs aux techniques de vente en groupe lors des animations commerciales.</button>
+          <button class="opt" onclick="ans(this,'w','e10_2')"><span class="opt-l">D</span>La gestion des accès et des permissions des employés sur les réseaux sociaux de l'entreprise.</button>
+        </div>
+        <div class="expl" id="e10_2"><strong>Bonne réponse : B.</strong> Le community management est un métier à part entière qui regroupe toutes les actions visant à créer, animer et développer une communauté autour d'une marque sur les réseaux sociaux. Pour le vendeur, cela se traduit concrètement par la publication de contenu utile, la réponse aux commentaires et messages, et l'interaction avec les abonnés pour renforcer le lien et la fidélité.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Qu'est-ce qu'un contenu "engageant" sur les réseaux sociaux ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e10_3')"><span class="opt-l">A</span>Un contenu qui fait la promotion des prix et promotions de l'enseigne de façon régulière.</button>
+          <button class="opt" onclick="ans(this,'c','e10_3')"><span class="opt-l">B</span>Un contenu qui apporte de la valeur à l'abonné (conseils, tutoriels, coulisses, offres exclusives) et génère des interactions (likes, commentaires, partages).</button>
+          <button class="opt" onclick="ans(this,'w','e10_3')"><span class="opt-l">C</span>Un contenu qui respecte toutes les règles juridiques sur la publicité en ligne et le droit à l'image.</button>
+          <button class="opt" onclick="ans(this,'w','e10_3')"><span class="opt-l">D</span>Un contenu professionnel rédigé par une agence de communication externe à l'enseigne.</button>
+        </div>
+        <div class="expl" id="e10_3"><strong>Bonne réponse : B.</strong> Un contenu engageant n'est pas uniquement promotionnel. Les internautes ne suivent pas les marques pour voir des publicités : ils les suivent pour obtenir de la valeur. Tutoriels d'utilisation des produits, conseils d'experts, coulisses de l'enseigne, offres réservées aux abonnés, concours… Ce type de contenu crée de l'attachement à la marque et transforme les abonnés en clients fidèles.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc10')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C11 – Enrichir et actualiser le SIC ===== -->
+<div class="section-card" id="c11">
+  <div class="s-breadcrumb">3.3 Évaluer les actions de fidélisation › <span>Compétence 11</span></div>
+  <div class="s-title2">Enrichir et actualiser le SIC</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">SIC (Système d'Information Commercial)</div><div class="notion-def">Ensemble des outils et bases de données permettant de collecter, stocker et exploiter les informations commerciales : données clients, historique d'achats, actions réalisées, résultats de satisfaction.</div></div>
+        <div class="notion"><div class="notion-term">Enrichissement du SIC</div><div class="notion-def">Ajout de nouvelles informations pertinentes sur les clients et les actions réalisées : nouveaux contacts, intérêts détectés, résultats d'enquêtes, données comportementales.</div></div>
+        <div class="notion"><div class="notion-term">Actualisation</div><div class="notion-def">Mise à jour des informations existantes pour maintenir leur précision : nouvelle adresse e-mail, changement de situation, préférences actualisées. Une donnée non actualisée est une donnée fausse.</div></div>
+        <div class="notion"><div class="notion-term">Qualité des données</div><div class="notion-def">Niveau de précision, d'exhaustivité et de fraîcheur des données dans le SIC. Elle conditionne directement la pertinence des actions commerciales qui en découlent.</div></div>
+        <div class="notion"><div class="notion-term">Profilage client</div><div class="notion-def">Construction d'une fiche client enrichie : comportement d'achat, préférences, fréquence, panier moyen, sensibilité aux promotions, canal préféré, niveau de satisfaction.</div></div>
+        <div class="notion"><div class="notion-term">RGPD et SIC</div><div class="notion-def">Les données stockées dans le SIC doivent être collectées avec le consentement du client, utilisées pour la finalité déclarée et supprimées à l'expiration de la durée de conservation prévue.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Un SIC n'a de valeur que si ses données sont <strong>à jour, fiables et complètes</strong> : enrichir et actualiser est une obligation continue.</li>
+          <li>Enrichir après chaque interaction client : événement, achat, réclamation, satisfaction, appel.</li>
+          <li>Actualiser = mettre à jour les informations existantes (e-mail changé, adresse modifiée, préférence évoluée).</li>
+          <li>La qualité des données du SIC détermine directement la qualité des futures actions de fidélisation.</li>
+          <li>Respecter le RGPD : consentement, finalité déclarée, durée de conservation limitée, sécurité des données.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 11</h3></div>
+    <div class="qcm-body" id="qc11">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Quelle est la différence entre "enrichir" et "actualiser" le SIC ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e11_1')"><span class="opt-l">A</span>Ce sont deux termes synonymes désignant la même opération de mise à jour des données.</button>
+          <button class="opt" onclick="ans(this,'c','e11_1')"><span class="opt-l">B</span>Enrichir = ajouter de nouvelles informations (intérêts, projets, données comportementales) ; actualiser = corriger et mettre à jour les informations existantes (nouvelle adresse, préférence évoluée).</button>
+          <button class="opt" onclick="ans(this,'w','e11_1')"><span class="opt-l">C</span>Enrichir concerne uniquement les nouveaux clients ; actualiser concerne uniquement les clients existants.</button>
+          <button class="opt" onclick="ans(this,'w','e11_1')"><span class="opt-l">D</span>Enrichir est réalisé par le service marketing ; actualiser est réalisé par les vendeurs en magasin.</button>
+        </div>
+        <div class="expl" id="e11_1"><strong>Bonne réponse : B.</strong> Enrichir et actualiser sont deux opérations complémentaires mais distinctes. Enrichir, c'est ajouter de la valeur : un client revient → on note qu'il s'intéresse à la gamme Premium. Actualiser, c'est maintenir l'exactitude : un client change d'adresse → on met à jour sa fiche. Les deux sont nécessaires pour maintenir un SIC de qualité.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Pourquoi est-il important d'enrichir le SIC immédiatement après un événement commercial ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e11_2')"><span class="opt-l">A</span>Pour satisfaire une exigence légale imposée aux organisateurs d'événements commerciaux.</button>
+          <button class="opt" onclick="ans(this,'c','e11_2')"><span class="opt-l">B</span>Pour capitaliser sur les informations collectées pendant l'événement avant qu'elles s'oublient, et permettre des relances et actions futures personnalisées.</button>
+          <button class="opt" onclick="ans(this,'w','e11_2')"><span class="opt-l">C</span>Pour calculer la commission des vendeurs ayant participé à l'organisation de l'événement.</button>
+          <button class="opt" onclick="ans(this,'w','e11_2')"><span class="opt-l">D</span>Pour informer les fournisseurs des produits les plus appréciés par les clients lors de l'événement.</button>
+        </div>
+        <div class="expl" id="e11_2"><strong>Bonne réponse : B.</strong> Les informations collectées lors d'un événement (projets mentionnés, intérêts exprimés, préférences révélées) s'oublient très vite. Les intégrer dans le SIC immédiatement après permet de les exploiter pour des relances personnalisées (J+1, J+2) et pour enrichir le profil client en vue de futures actions commerciales ciblées. Attendre, c'est perdre de la valeur.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Quelle contrainte le RGPD impose-t-il sur les données stockées dans le SIC ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e11_3')"><span class="opt-l">A</span>Les données ne peuvent être stockées que sur des serveurs situés en France.</button>
+          <button class="opt" onclick="ans(this,'w','e11_3')"><span class="opt-l">B</span>Chaque mise à jour du SIC doit être déclarée à la CNIL dans les 72 heures.</button>
+          <button class="opt" onclick="ans(this,'c','e11_3')"><span class="opt-l">C</span>Les données doivent être collectées avec consentement, utilisées pour la finalité déclarée, sécurisées et supprimées à l'expiration de la durée de conservation prévue.</button>
+          <button class="opt" onclick="ans(this,'w','e11_3')"><span class="opt-l">D</span>Seul le directeur commercial a le droit d'accéder aux données personnelles stockées dans le SIC.</button>
+        </div>
+        <div class="expl" id="e11_3"><strong>Bonne réponse : C.</strong> Le RGPD encadre l'ensemble du cycle de vie des données personnelles dans le SIC : elles doivent être collectées avec le consentement explicite du client, utilisées uniquement pour la finalité déclarée (ex : fidélisation), protégées contre les accès non autorisés, et supprimées lorsque la durée légale de conservation est dépassée ou que le client demande leur effacement (droit à l'oubli).</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc11')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C12 – Mesurer et analyser les résultats ===== -->
+<div class="section-card" id="c12">
+  <div class="s-breadcrumb">3.3 Évaluer les actions de fidélisation › <span>Compétence 12</span></div>
+  <div class="s-title2">Mesurer et analyser les résultats</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">KPI de fidélisation</div><div class="notion-def">Indicateurs clés mesurant l'efficacité des actions de fidélisation : taux de fidélisation, taux d'attrition, fréquence d'achat, panier moyen, NPS, taux de participation aux événements.</div></div>
+        <div class="notion"><div class="notion-term">ROI (Retour sur Investissement)</div><div class="notion-def">Ratio mesurant la rentabilité d'une action : (Gain généré − Coût de l'action) / Coût × 100. Il compare le bénéfice obtenu au coût investi pour évaluer si l'action vaut la peine d'être renouvelée.</div></div>
+        <div class="notion"><div class="notion-term">Taux de fidélisation</div><div class="notion-def">% de clients ayant effectué au moins un achat supplémentaire sur une période. Formule : (Clients conservés / Clients en début de période) × 100. Indicateur central de la santé commerciale.</div></div>
+        <div class="notion"><div class="notion-term">Analyse comparative</div><div class="notion-def">Comparaison des résultats obtenus avec les objectifs fixés, les résultats des périodes précédentes ou les benchmarks du secteur. Elle contextualise les chiffres et guide les décisions.</div></div>
+        <div class="notion"><div class="notion-term">Fréquence d'achat</div><div class="notion-def">Nombre moyen de fois qu'un client achète sur une période. Un indicateur clé de la fidélisation : plus la fréquence augmente, plus le client est fidèle et engagé avec l'enseigne.</div></div>
+        <div class="notion"><div class="notion-term">Valeur vie client (CLV)</div><div class="notion-def">Chiffre d'affaires total qu'un client génère tout au long de sa relation avec l'entreprise. Augmenter la CLV est l'objectif ultime de toute stratégie de fidélisation.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Mesurer avant et après chaque action pour évaluer l'impact réel et le ROI.</li>
+          <li>ROI = (Gain − Coût) / Coût × 100 : indicateur de rentabilité de référence pour comparer les actions.</li>
+          <li>Taux de fidélisation + taux d'attrition = 100% : indicateurs complémentaires et inversement liés.</li>
+          <li>L'analyse comparative (vs objectifs, vs période précédente) donne du sens aux chiffres bruts.</li>
+          <li>La valeur vie client (CLV) est l'objectif à long terme : fidéliser augmente mécaniquement la CLV.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 12</h3></div>
+    <div class="qcm-body" id="qc12">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Une campagne de fidélisation a coûté 2 000 € et a généré 8 000 € de CA supplémentaire. Quel est son ROI ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e12_1')"><span class="opt-l">A</span>4 000 %</button>
+          <button class="opt" onclick="ans(this,'w','e12_1')"><span class="opt-l">B</span>400 %</button>
+          <button class="opt" onclick="ans(this,'c','e12_1')"><span class="opt-l">C</span>300 %</button>
+          <button class="opt" onclick="ans(this,'w','e12_1')"><span class="opt-l">D</span>200 %</button>
+        </div>
+        <div class="expl" id="e12_1"><strong>Bonne réponse : C.</strong> ROI = (Gain − Coût) / Coût × 100 = (8 000 − 2 000) / 2 000 × 100 = 6 000 / 2 000 × 100 = 300%. Pour chaque euro investi dans la campagne, l'entreprise a récupéré 3 euros de bénéfice net. Un ROI de 300% est excellent. Note : ne pas confondre avec le rapport CA/coût (4) qui n'est pas le ROI.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Qu'est-ce que la valeur vie client (CLV) et pourquoi est-elle importante en fidélisation ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e12_2')"><span class="opt-l">A</span>La valeur marchande d'un fichier clients en cas de rachat de l'entreprise.</button>
+          <button class="opt" onclick="ans(this,'c','e12_2')"><span class="opt-l">B</span>Le chiffre d'affaires total qu'un client génère tout au long de sa relation avec l'entreprise : augmenter la fidélité augmente mécaniquement la CLV.</button>
+          <button class="opt" onclick="ans(this,'w','e12_2')"><span class="opt-l">C</span>La durée de vie maximale d'un produit avant qu'il ne soit remplacé par une nouvelle génération.</button>
+          <button class="opt" onclick="ans(this,'w','e12_2')"><span class="opt-l">D</span>Le nombre d'années pendant lesquelles un client reste fidèle à une enseigne avant de changer de fournisseur.</button>
+        </div>
+        <div class="expl" id="e12_2"><strong>Bonne réponse : B.</strong> La CLV (Customer Lifetime Value) est une vision long terme de la valeur d'un client : un client qui achète 200€ par an pendant 10 ans représente 2 000€ de CLV. Augmenter la fidélité (fréquence, durée, panier moyen) augmente mécaniquement la CLV. C'est pourquoi investir dans la fidélisation a un effet de levier considérable sur la rentabilité à long terme de l'entreprise.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Pourquoi comparer les résultats d'une action aux objectifs fixés en amont est-il indispensable ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e12_3')"><span class="opt-l">A</span>Pour justifier les dépenses engagées auprès du service comptable de l'entreprise.</button>
+          <button class="opt" onclick="ans(this,'c','e12_3')"><span class="opt-l">B</span>Pour évaluer objectivement si l'action a atteint ses buts, identifier les écarts et décider si elle mérite d'être reconduite, modifiée ou abandonnée.</button>
+          <button class="opt" onclick="ans(this,'w','e12_3')"><span class="opt-l">C</span>Parce que la réglementation commerciale impose la publication des objectifs et des résultats de toute action de fidélisation.</button>
+          <button class="opt" onclick="ans(this,'w','e12_3')"><span class="opt-l">D</span>Pour démontrer à la concurrence que les actions menées sont plus efficaces que les leurs.</button>
+        </div>
+        <div class="expl" id="e12_3"><strong>Bonne réponse : B.</strong> Un résultat n'a de sens que rapporté à un objectif : 50 participants à un événement, c'est beaucoup si l'objectif était 30, et peu si c'était 100. La comparaison objectifs/résultats permet d'évaluer objectivement l'efficacité de l'action, de comprendre les écarts (positifs ou négatifs) et de décider en connaissance de cause si l'action doit être renouvelée, améliorée ou remplacée.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc12')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C13 – Rendre compte des actions et résultats ===== -->
+<div class="section-card" id="c13">
+  <div class="s-breadcrumb">3.3 Évaluer les actions de fidélisation › <span>Compétence 13</span></div>
+  <div class="s-title2">Rendre compte des actions et des résultats par écrit et/ou à l'oral</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Rapport d'activité</div><div class="notion-def">Document écrit récapitulant les actions réalisées sur une période : objectifs, actions menées, résultats obtenus, écarts et recommandations. Il sert de référence pour les décisions futures.</div></div>
+        <div class="notion"><div class="notion-term">Structure OARR</div><div class="notion-def">Trame efficace pour un compte rendu : Objectifs fixés → Actions réalisées → Résultats obtenus → Recommandations. Garantit un compte rendu complet, logique et orienté décision.</div></div>
+        <div class="notion"><div class="notion-term">Compte rendu oral</div><div class="notion-def">Restitution verbale lors d'une réunion ou d'un entretien. Requiert une préparation rigoureuse, des supports visuels si nécessaire et une adaptation au temps imparti.</div></div>
+        <div class="notion"><div class="notion-term">Écart objectif/résultat</div><div class="notion-def">Différence entre ce qui était prévu et ce qui a été réellement obtenu. Expliquer les écarts (positifs ou négatifs) est aussi important que de présenter les chiffres bruts.</div></div>
+        <div class="notion"><div class="notion-term">Support de présentation</div><div class="notion-def">Outil d'aide à la restitution orale : diaporama, tableau de bord, graphiques. Il doit être lisible, synthétique et au service du discours, pas une fin en soi.</div></div>
+        <div class="notion"><div class="notion-term">Niveau de langage adapté</div><div class="notion-def">Adapter le vocabulaire et le niveau de détail au destinataire : un directeur n'a pas besoin des mêmes explications qu'un collègue vendeur. La clarté prime sur l'exhaustivité.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Utiliser la structure OARR : Objectifs → Actions → Résultats → Recommandations pour un compte rendu complet et logique.</li>
+          <li>Expliquer les écarts : un résultat sans explication de l'écart avec l'objectif ne permet pas de décider.</li>
+          <li>Adapter le niveau de détail au destinataire : direction = vision synthétique ; responsable terrain = détails opérationnels.</li>
+          <li>Un compte rendu oral nécessite une préparation aussi rigoureuse qu'un rapport écrit.</li>
+          <li>Les supports visuels (graphiques, tableaux) rendent les données plus lisibles et mémorables.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 13</h3></div>
+    <div class="qcm-body" id="qc13">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Que signifie la trame OARR pour structurer un compte rendu d'action ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e13_1')"><span class="opt-l">A</span>Offre, Action, Retour, Résultat.</button>
+          <button class="opt" onclick="ans(this,'w','e13_1')"><span class="opt-l">B</span>Organisation, Analyse, Rapport, Recommandations.</button>
+          <button class="opt" onclick="ans(this,'c','e13_1')"><span class="opt-l">C</span>Objectifs fixés → Actions réalisées → Résultats obtenus → Recommandations.</button>
+          <button class="opt" onclick="ans(this,'w','e13_1')"><span class="opt-l">D</span>Observations, Améliorations, Risques, Ressources.</button>
+        </div>
+        <div class="expl" id="e13_1"><strong>Bonne réponse : C.</strong> La trame OARR est une structure de compte rendu particulièrement efficace : elle part des Objectifs fixés en amont, décrit les Actions concrètement menées, présente les Résultats obtenus (avec les écarts par rapport aux objectifs), et propose des Recommandations pour la suite. Cette logique rend le compte rendu complet, lisible et orienté vers la prise de décision.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Pourquoi est-il important d'expliquer les écarts entre les objectifs et les résultats ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e13_2')"><span class="opt-l">A</span>Pour se justifier auprès de la direction en cas de résultats inférieurs aux objectifs.</button>
+          <button class="opt" onclick="ans(this,'c','e13_2')"><span class="opt-l">B</span>Pour permettre à la hiérarchie de comprendre les causes réelles des succès et des échecs, et de prendre les décisions les plus adaptées.</button>
+          <button class="opt" onclick="ans(this,'w','e13_2')"><span class="opt-l">C</span>Parce que les objectifs sont toujours trop ambitieux et qu'il faut systématiquement en expliquer le dépassement.</button>
+          <button class="opt" onclick="ans(this,'w','e13_2')"><span class="opt-l">D</span>Pour démontrer que les résultats obtenus sont toujours supérieurs aux objectifs fixés par la direction.</button>
+        </div>
+        <div class="expl" id="e13_2"><strong>Bonne réponse : B.</strong> Un chiffre brut sans contexte est peu utile. Si l'objectif était 100 participants et qu'on en a eu 70, la hiérarchie doit savoir pourquoi : météo défavorable ? Concurrence d'un autre événement ? Date mal choisie ? Mauvaise communication ? L'explication des écarts transforme un compte rendu de résultats en outil d'apprentissage et de prise de décision éclairée.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Comment adapter son compte rendu oral selon qu'il s'adresse à la direction générale ou à l'équipe terrain ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e13_3')"><span class="opt-l">A</span>Utiliser exactement le même niveau de détail pour garantir la cohérence des informations transmises.</button>
+          <button class="opt" onclick="ans(this,'c','e13_3')"><span class="opt-l">B</span>Direction : vision synthétique avec les KPI stratégiques et les grandes orientations. Équipe terrain : détails opérationnels, actions concrètes et résultats pratiques.</button>
+          <button class="opt" onclick="ans(this,'w','e13_3')"><span class="opt-l">C</span>Toujours privilégier le compte rendu écrit à l'oral car il est plus précis et moins sujet à interprétation.</button>
+          <button class="opt" onclick="ans(this,'w','e13_3')"><span class="opt-l">D</span>Adapter uniquement le ton (formel avec la direction, décontracté avec l'équipe) sans changer le niveau de détail.</button>
+        </div>
+        <div class="expl" id="e13_3"><strong>Bonne réponse : B.</strong> Adapter le contenu au destinataire est une compétence professionnelle fondamentale. La direction a besoin d'une vision globale pour décider des orientations stratégiques (KPI, tendances, ROI global). L'équipe terrain a besoin de comprendre ce qui a fonctionné ou non dans les actions concrètes pour améliorer leur pratique. Même message, niveaux de granularité différents.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc13')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== C14 – Proposer des axes d'amélioration ===== -->
+<div class="section-card" id="c14">
+  <div class="s-breadcrumb">3.3 Évaluer les actions de fidélisation › <span>Compétence 14</span></div>
+  <div class="s-title2">Proposer des axes d'amélioration</div>
+  <div class="fiche">
+    <div class="fiche-head"><div class="fiche-head-ico">📖</div><h3>Fiche de révision</h3></div>
+    <div class="fiche-body">
+      <div class="notions-grid">
+        <div class="notion"><div class="notion-term">Axe d'amélioration</div><div class="notion-def">Proposition concrète et argumentée visant à corriger un écart identifié ou à optimiser une action qui a bien fonctionné. Il doit être réaliste, mesurable et accompagné d'un indicateur de suivi.</div></div>
+        <div class="notion"><div class="notion-term">Force de proposition</div><div class="notion-def">Posture professionnelle valorisée : le vendeur ne se contente pas d'exécuter les actions décidées par la hiérarchie mais propose activement des idées d'amélioration basées sur son observation terrain.</div></div>
+        <div class="notion"><div class="notion-term">Amélioration corrective</div><div class="notion-def">Action visant à corriger ce qui n'a pas fonctionné : "Le taux de participation était de 30%, je propose de décaler l'heure de l'événement et d'envoyer les invitations 2 semaines plus tôt."</div></div>
+        <div class="notion"><div class="notion-term">Amélioration préventive</div><div class="notion-def">Action visant à éviter la réapparition d'un problème déjà rencontré : "Pour éviter les ruptures de stock constatées lors de la vente privée, je propose de pré-réserver les produits phares 3 semaines avant."</div></div>
+        <div class="notion"><div class="notion-term">Plan d'action</div><div class="notion-def">Document structurant les améliorations proposées : action à mener, responsable désigné, délai fixé, indicateur de suivi. Il transforme les propositions en engagements concrets.</div></div>
+        <div class="notion"><div class="notion-term">Amélioration continue</div><div class="notion-def">Démarche organisationnelle consistant à chercher systématiquement à améliorer les processus et les résultats à chaque cycle. Chaque action est une opportunité d'apprentissage.</div></div>
+      </div>
+      <div class="keypoints">
+        <div class="kp-title">Points clés à retenir</div>
+        <ul>
+          <li>Toute proposition d'amélioration doit être basée sur des données, pas sur des impressions subjectives.</li>
+          <li>Distinguer amélioration corrective (corriger ce qui n'a pas marché) et préventive (éviter la réapparition d'un problème).</li>
+          <li>Chaque proposition doit s'accompagner d'un responsable, d'un délai et d'un indicateur de suivi.</li>
+          <li>Être force de proposition est une posture professionnelle valorisée et attendue à l'examen.</li>
+          <li>L'amélioration continue transforme chaque action en source d'apprentissage pour les actions futures.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="qcm">
+    <div class="qcm-head"><div class="qcm-head-ico">✏️</div><h3>QCM — Compétence 14</h3></div>
+    <div class="qcm-body" id="qc14">
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">1</span>Quelle est la différence entre une amélioration corrective et une amélioration préventive ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e14_1')"><span class="opt-l">A</span>L'amélioration corrective coûte moins cher que l'amélioration préventive.</button>
+          <button class="opt" onclick="ans(this,'c','e14_1')"><span class="opt-l">B</span>L'amélioration corrective corrige un problème qui s'est déjà produit ; l'amélioration préventive évite qu'un problème identifié se reproduise à l'avenir.</button>
+          <button class="opt" onclick="ans(this,'w','e14_1')"><span class="opt-l">C</span>L'amélioration corrective est décidée par la hiérarchie ; l'amélioration préventive est proposée par les vendeurs terrain.</button>
+          <button class="opt" onclick="ans(this,'w','e14_1')"><span class="opt-l">D</span>Seule l'amélioration corrective est pertinente dans le cadre de la fidélisation client.</button>
+        </div>
+        <div class="expl" id="e14_1"><strong>Bonne réponse : B.</strong> L'amélioration corrective intervient après un problème constaté : on corrige. L'amélioration préventive intervient en amont pour éviter qu'un problème connu se reproduise. Les deux sont complémentaires et nécessaires : corriger sans prévenir, c'est répéter les mêmes erreurs ; prévenir sans corriger, c'est ignorer les problèmes existants.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">2</span>Pourquoi une proposition d'amélioration doit-elle s'accompagner d'un indicateur de suivi ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e14_2')"><span class="opt-l">A</span>Pour permettre au service RH d'évaluer la performance individuelle du vendeur qui a proposé l'amélioration.</button>
+          <button class="opt" onclick="ans(this,'c','e14_2')"><span class="opt-l">C</span>Pour pouvoir mesurer objectivement si l'amélioration mise en place a bien produit l'effet attendu et décider des ajustements nécessaires.</button>
+          <button class="opt" onclick="ans(this,'w','e14_2')"><span class="opt-l">B</span>Parce que la direction exige systématiquement un indicateur pour valider toute proposition d'amélioration.</button>
+          <button class="opt" onclick="ans(this,'w','e14_2')"><span class="opt-l">D</span>Pour calculer le budget nécessaire à la mise en œuvre de l'amélioration proposée.</button>
+        </div>
+        <div class="expl" id="e14_2"><strong>Bonne réponse : C.</strong> Sans indicateur de suivi, il est impossible de savoir si l'amélioration a fonctionné. L'indicateur permet de mesurer l'avant/après : si le taux de participation aux événements était de 30% et que l'objectif de l'amélioration est de le porter à 50%, on mesurera ce taux lors de l'événement suivant. Sans cet indicateur, on ne peut ni valider l'amélioration ni l'ajuster si elle n'atteint pas son but.</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text"><span class="q-num">3</span>Qu'est-ce que la démarche d'amélioration continue ?</div>
+        <div class="opts">
+          <button class="opt" onclick="ans(this,'w','e14_3')"><span class="opt-l">A</span>Un programme de formation continue obligatoire pour tous les vendeurs en Bac Pro MCV.</button>
+          <button class="opt" onclick="ans(this,'c','e14_3')"><span class="opt-l">B</span>Une démarche organisationnelle consistant à chercher systématiquement à améliorer les processus et résultats à chaque cycle, en traitant chaque action comme une source d'apprentissage.</button>
+          <button class="opt" onclick="ans(this,'w','e14_3')"><span class="opt-l">C</span>Un audit annuel réalisé par un organisme externe pour évaluer la qualité des actions commerciales.</button>
+          <button class="opt" onclick="ans(this,'w','e14_3')"><span class="opt-l">D</span>Un objectif de croissance annuel de 5% imposé par la direction à toutes les équipes commerciales.</button>
+        </div>
+        <div class="expl" id="e14_3"><strong>Bonne réponse : B.</strong> L'amélioration continue (inspirée du Kaizen japonais) est une philosophie managériale : plutôt que d'attendre les grandes révolutions, on cherche à améliorer un peu chaque chose à chaque cycle. Collecter → Analyser → Améliorer → Mesurer → Recommencer. Chaque action de fidélisation, même modeste, devient une opportunité d'apprendre et de progresser pour la suivante.</div>
+      </div>
+      <button class="reset-btn" onclick="resetQcm('qc14')">↺ Recommencer</button>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function toggleBloc(id, btn) {
+  var el = document.getElementById(id);
+  var isOpen = el.classList.contains('open');
+  document.querySelectorAll('.comp-list').forEach(function(l){l.classList.remove('open')});
+  document.querySelectorAll('.bloc-header').forEach(function(h){h.classList.remove('open')});
+  if (!isOpen) { el.classList.add('open'); btn.classList.add('open'); }
+}
+
+function show(id, btn) {
+  document.querySelectorAll('.section-card').forEach(function(s){s.classList.remove('visible')});
+  var w = document.getElementById('welcome');
+  if(w) w.style.display='none';
+  document.getElementById(id).classList.add('visible');
+  document.querySelectorAll('.comp-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  document.getElementById('main').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function ans(btn, result, expId) {
+  var block = btn.closest('.q-block');
+  var allBtns = block.querySelectorAll('.opt');
+  allBtns.forEach(function(b){b.disabled=true});
+  if (result === 'c') {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+    allBtns.forEach(function(b){
+      var oc = b.getAttribute('onclick')||'';
+      if(oc.indexOf("'c'")!==-1) b.classList.add('reveal');
+    });
+  }
+  var exp = document.getElementById(expId);
+  if(exp) exp.classList.add('on');
+}
+
+function resetQcm(containerId) {
+  var c = document.getElementById(containerId);
+  c.querySelectorAll('.opt').forEach(function(b){
+    b.disabled=false;
+    b.classList.remove('correct','wrong','reveal');
+  });
+  c.querySelectorAll('.expl').forEach(function(e){e.classList.remove('on')});
+}
+
+var firstBloc = document.querySelector('.bloc-header');
+if(firstBloc) toggleBloc('b31', firstBloc);
+</script>
+</body>
+</html>
